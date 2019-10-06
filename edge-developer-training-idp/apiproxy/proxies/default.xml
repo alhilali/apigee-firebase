@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <Flows>
+        <Flow name="authenticate">
+            <Description>Authenticate</Description>
+            <Request/>
+            <Response>
+                <Step>
+                    <Name>AM-Failure-Response</Name>
+                    <Condition>request.formparam.username!="apininja" or request.formparam.password!="iloveapis"</Condition>
+                </Step>
+                <Step>
+                    <Name>AM-Success-Response</Name>
+                    <Condition>request.formparam.username="apininja" and request.formparam.password="iloveapis"</Condition>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/authenticate") and (request.verb = "POST")</Condition>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/v1/identity</BasePath>
+        <Properties/>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute"/>
+</ProxyEndpoint>

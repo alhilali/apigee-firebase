@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="default">
+    <Description/>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+      <Request>
+            <Step>
+                <Name>AssignMessage-SetTargetVariables</Name>
+            </Step>
+        </Request>
+        <Response/>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request>
+            <Step>
+                <Name>JavaScript-UpdateTargetUrl</Name>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Name>JavaScript-FormatLikeBaaS</Name>
+                <Condition>request.verb == "GET"</Condition>
+            </Step>
+        </Response>
+    </PostFlow>
+    <Flows>
+        <Flow name="Get product by ID">
+            <Description/>
+            <Request/>
+            <Response>
+                <Step>
+                    <Name>RaiseFault-InvalidProductId</Name>
+                    <Condition>response.content == "null"</Condition>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/products/*") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Get product availabiity">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>JavaScript-ProductAvailability</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>RaiseFault-SkuNotFound</Name>
+                    <Condition>response.content == "null"</Condition>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/products/*/availability") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Create product">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>AssignMessage-CreateProductWithPut</Name>
+                </Step>
+                <Step>
+                    <Name>JavaScript-AddProductNameToURI</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/products") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="Update product">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>AssignMessage-ChangeToPatch</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>proxy.pathsuffix MatchesPath "/products/*" and request.verb = "PUT"</Condition>
+        </Flow>
+    </Flows>
+    <HTTPTargetConnection>
+      <Properties/>
+      <LoadBalancer>
+        <Server name="edge-developer-training-backend"/>
+      </LoadBalancer>
+      <Path>{dynamicPath}</Path>
+    </HTTPTargetConnection>
+</TargetEndpoint>

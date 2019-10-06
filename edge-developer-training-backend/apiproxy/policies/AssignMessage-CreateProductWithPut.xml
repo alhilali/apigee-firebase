@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage-CreateProductWithPut">
+    <DisplayName>AssignMessage-CreateProductWithPut</DisplayName>
+    <Properties/>
+    <Set>
+        <Verb>PUT</Verb>
+        <Path>/{productName}</Path>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

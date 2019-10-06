@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="2" name="developer-training-backend">
+    <Basepaths>/db</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1517008795125</CreatedAt>
+    <CreatedBy>defaultUser</CreatedBy>
+    <Description></Description>
+    <DisplayName>edge-developer-training-backend</DisplayName>
+    <LastModifiedAt>1517008819473</LastModifiedAt>
+    <LastModifiedBy>defaultUser</LastModifiedBy>
+    <Policies>
+        <Policy>AssignMessage-ChangeToPatch</Policy>
+        <Policy>AssignMessage-CreateProductWithPut</Policy>
+        <Policy>AssignMessage-SavePathSuffix</Policy>
+        <Policy>AssignMessage-UpdateTarget</Policy>
+        <Policy>Basic-Authentication</Policy>
+        <Policy>ExtractVariables-ProductId</Policy>
+        <Policy>ExtractVariables-ProductName</Policy>
+        <Policy>JavaScript-AddProductNameToURI</Policy>
+        <Policy>JavaScript-FormatLikeBaaS</Policy>
+        <Policy>JavaScript-ProductAvailability</Policy>
+        <Policy>JavaScript-UpdateTargetUrl</Policy>
+        <Policy>RaiseFault-InvalidProductId</Policy>
+        <Policy>RaiseFault-NotFound</Policy>
+        <Policy>RaiseFault-SkuNotFound</Policy>
+        <Policy>Verify-API-Key</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://AddProductNameToURI.js</Resource>
+        <Resource>jsc://FormatLikeBaaS.js</Resource>
+        <Resource>jsc://ProductAvailability.js</Resource>
+        <Resource>jsc://UpdateTargetUrl.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>AssignMessage-SavePathSuffix</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <Flows>
+      <Flow name="root">
+           <Description/>
+           <Request>
+               <Step>
+                   <Name>Raise-Fault-401</Name>
+               </Step>
+           </Request>
+           <Response/>
+           <Condition>(proxy.pathsuffix = "/" or proxy.pathsuffix MatchesPath "") and (request.verb = "GET")</Condition>
+       </Flow>
+        <Flow name="Get all products">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/products") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Get product by ID">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/products/*") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Get product availability">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>ExtractVariables-ProductId</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/products/*/availability") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Create product">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>RaiseFault-Unauthorized</Name>
+                    <Condition>request.header.Authorization = null and request.header.clientId = null</Condition>
+                </Step>
+                <Step>
+                    <Name>Basic-Authentication</Name>
+                    <Condition>request.header.Authorization != null</Condition>
+                </Step>
+                <Step>
+                    <Name>Verify-API-Key</Name>
+                </Step>
+                <Step>
+                    <Name>ExtractVariables-ProductName</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/products") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="Update product">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>RaiseFault-Unauthorized</Name>
+                    <Condition>request.header.Authorization = null and request.header.clientId = null</Condition>
+                </Step>
+                <Step>
+                    <Name>Basic-Authentication</Name>
+                    <Condition>request.header.Authorization != null</Condition>
+                </Step>
+                <Step>
+                    <Name>Verify-API-Key</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/products/*") and (request.verb = "PUT")</Condition>
+        </Flow>
+        <Flow name="Get stores">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/stores") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Get stores by ID">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/stores/*") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Not Found">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>RaiseFault-NotFound</Name>
+                </Step>
+            </Request>
+            <Response/>
+             <Condition>proxy.pathsuffix MatchesPath "/*"</Condition>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/db</BasePath>
+        <Properties/>
+        <VirtualHost>default</VirtualHost>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

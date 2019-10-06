@@ -1,0 +1,24 @@
+{
+		"name": "apigee-account-proxy-v1",
+		"version": "1.0.0",
+		"dependencies": {
+				"JSONPath": "^0",
+				"is-my-json-valid": "^2",
+				"path": "^0",
+				"prettyjson": "^1",
+				"request": "^2",
+				"swagger-tools": "^0",
+				"xmldom": "^0",
+				"xpath.js": "^1"
+		},
+		"devDependencies": {
+				"cucumber": "^3",
+				"eslint": "^4",
+				"eslint-config-google": "^0",
+				"gulp": "^3",
+				"gulp-cucumber": "^0",
+				"gulp-eslint": "^4",
+				"istanbul": "latest",
+				"maven" : "latest"
+		}
+}

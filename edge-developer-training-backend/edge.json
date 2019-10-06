@@ -1,0 +1,88 @@
+{
+    "version": "1.0",
+    "envConfig": {
+        "test": {
+          "targetServers": [
+              {
+                "name" : "edge-developer-training-backend",
+                "host" : "undefined",
+                "isEnabled" : true,
+                "port" : 443,
+                "sSLInfo": {
+                  "enabled": "true"
+                }
+              }
+          ],
+          "caches": [
+          ],
+          "kvms": [
+          ]
+        },
+        "prod": {
+          "targetServers": [
+            {
+              "name" : "edge-developer-training-backend",
+              "host" : "undefined",
+              "isEnabled" : true,
+              "port" : 443,
+              "sSLInfo": {
+                "enabled": "true"
+              }
+            }
+          ],
+          "caches": [
+          ],
+          "kvms": [
+          ]
+        }
+    },
+    "orgConfig": {
+        "apiProducts": [
+            {
+                "name": "developer-training-backend-product",
+                "apiResources": [
+                    "/"
+                ],
+                "approvalType": "auto",
+                "attributes": [
+                    {
+                        "name": "description",
+                        "value": "Developer training backend product"
+                    }
+                ],
+                "description": "Developer training backend product",
+                "displayName": "developer-training-backend-product",
+                "environments": [
+                    "test",
+                    "prod"
+                ],
+                "proxies": [
+                    "edge-developer-training-backend"
+                ],
+                "quota": "10000",
+                "quotaInterval": "1",
+                "quotaTimeUnit": "month",
+                "scopes": []
+            }
+        ],
+        "developers": [
+            {
+                "email": "developertraining@example.com",
+                "firstName": "Developer",
+                "lastName": "Training",
+                "userName": "developertraining@example.com",
+                "attributes": []
+            }
+        ],
+        "developerApps": {
+            "developertraining@example.com": [
+                {
+                    "name": "developer-training-backend-app",
+                    "apiProducts": [ "developer-training-backend-product" ],
+                    "callbackUrl": "",
+                    "scopes": []
+                }
+            ]
+        }
+    }
+}

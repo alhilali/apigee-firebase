@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage-UpdateTarget">
+    <DisplayName>AssignMessage-UpdateTarget</DisplayName>
+    <Properties/>
+    <AssignVariable>
+        <Name>temp.url</Name>
+        <Ref>target.url</Ref>
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

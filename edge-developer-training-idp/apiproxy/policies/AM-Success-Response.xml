@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-Success-Response">
+    <DisplayName>AM-Success-Response</DisplayName>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Content-Type">application/json</Header>
+        </Headers>
+        <Payload contentType="application/json">
+            {
+                "success": true,
+                "name":"API Ninja",
+                "email": "apininja@example.com"
+            }
+        </Payload>
+        <ReasonPhrase>OK</ReasonPhrase>
+        <StatusCode>200</StatusCode>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="true" transport="http" type="response"/>
+</AssignMessage>
